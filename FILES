@@ -1,0 +1,43 @@
+ABOUT			About the various modules in Litestream.
+ACKNOWLEDGEMENTS	Credit where credit's due.
+BUGS			Known defects and shortcomings.
+CHANGELOG		Pointer to web changelog.
+CONTACT			How to learn more about Litestream and get in touch
+			with the author.
+FILES			This file.
+
+LICENSE			The terms for use and distribution of this software.
+			Read LICENSE carefully.
+
+MAKEITGO		Installation and execution instructions.
+Makefile		Used in build.
+README			Every software has this.  So does Litestream.
+client.c		Client simulator.
+hexdump.c		Used in debugging.
+http.c			Various utilities to do HTTP-related stuff.
+icy.c			Parse the ICY protocol.
+icy.h			ICY structures and prototypes.
+mp3.c			MP3 frame handling.
+mp3.h			MP3 frame structure and prototypes.
+playlist.c		Playlist management for the Litestream Source.
+playlist.h		Playlist structures and prototypes.
+restream.c		Literestream Server main file.
+server.c		Server simulator.
+source.c		Litestream Source main file.
+stream.c		Litestream Server main file.
+stream_cli.c		Client TCP code.
+stream_config.h		Various configuration things.
+stream_log.c		Logging functions.
+stream_sched.c		Scheduler.
+stream_serv.c		Server TCP code.
+textutils.c		Various text manipulation functions.
+yp.c			Talk to the YP server.
+yp.h			YP prototypes.
+
+include/http.h		HTTP prototypes.
+include/stream_inet.h	TCP structures and prototypes.
+include/stream_sched.h	Scheduler structures and prototypes.
+include/stream_std.h	Standard include for useful functions.
+include/textutils.h	Text manipulation prototypes.
+
+### $Id: FILES,v 1.3 2003/03/21 10:33:43 bandix Exp $ ###

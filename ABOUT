@@ -1,0 +1,56 @@
+This file describes the various components of the Litestream MP3 Streaming
+System.
+
+Litestream Server
+
+	Litestream Server is the streaming server.  It connects to a
+	streaming source on one end and replicates that stream to clients
+	on the other end.
+
+	source --> Litestream Server --> clients
+
+Literestream Server
+
+	Literestream Server is the mirroring server.  It connects to a
+	streaming server on one end and replicates that stream to clients
+	(possibly other mirroring servers> on the other end.
+
+	Litestream Server --> Literestream Server --> clients
+
+	The Literestream Server is the way to scale Litestream.  It allows
+	you to use few network resources between broadcast centers while
+	maintaining good quality to your listeners.  For example, I could
+	set up broadcast centers in Australia, Europe, and the US, all
+	connected with Literestream Servers.  Australian listeners would
+	connect to their local server instead of connecting to the one in
+	the US, preventing network saturation.
+
+Litestream Streaming Source
+
+	Litestream Streaming Source is a simple, non-reencoding streaming
+	source which streams a playlist to the streaming server.  It's an
+	easy way to source a stream unattended.
+
+	Litestream Streaming Source --> Litestream Server
+
+Example of a real system:
+
+	               Litestream Streaming Source
+				    |
+				    |
+				    V
+	                    Litestream Server
+	                      /     |
+	                     /      |
+			 clients    V
+				  Literestream Server
+				    |        \
+				    |         \
+				    V       clients
+	                  Literestream Server
+			            |
+			            |
+				    V
+			         clients
+
+### $Id: ABOUT,v 1.3 2003/03/21 03:04:55 bandix Exp $ ###

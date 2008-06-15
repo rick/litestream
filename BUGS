@@ -1,0 +1,23 @@
+Bugs, what Bugs?
+
+jrb6 FIXED:  fixed Linux DoS as listed below (yanked ethernet DoS).
+
+stj5 introduced:  What, if any need, is there to keep the literestream code in
+check with the litestream code in repects to the omaha fix?  Presumably
+literestream is going to connect to a server, thus it's source is an existing
+shout-type stream.  
+
+Determine the cause of the stream hanging if a client's network connection
+dies.  It appears that a client whose connection dies (ie, yanked ethernet 
+cable) can cause the litestream server to hang the stream for other clients connected.  
+
+Implement some sort of authentication for streaming sources.
+
+--- BEGIN HISTORICAL BUGS ---
+* If there is a network error and the yp server forgets about the stream
+  information, the source must be restarted. Because I don't fully
+  implement yp.
+* No multiple yp servers because icecast speaks a different yp which I don't
+  want to implement.
+
+### $Id: BUGS,v 1.4 2003/03/21 11:05:00 bandix Exp $ ###

@@ -1,0 +1,105 @@
+### $Id ###
+
+Litestream 1.3RC2
+	Commented out a compiler warning directive about FD_SETSIZE on
+	non-FreeBSD systems.  If noone has looked into this by now, noone
+	probably ever will. :-/
+
+Litestream 1.3RC1
+        Removed DBUG scaffolding which was causing problems with some Linux
+	systems due to obsolescence of varargs.h header.
+
+Litestream 1.2
+	This is the 1.2RC1 released.
+
+Litestream 1.2RC1
+	This is the jrb6 release with updated CHANGELOG and Makefile.
+
+jrb6
+	This adds DBUG89 cpp macro calls (turned off by CFLAGS in Makefile right
+	now) and fixes the Linux plug-pulling DoS bug.  This also updates the
+	restream.c code.
+
+stj5
+	Tracked down a bug in which a streaming source (ie, Darkice) cannot connect.
+	This patch to stream.c should  be considered beta at this time (we've tested
+	it, it works for us).  What other stream source clients want to connect and
+	possibly cannot? (hence the beta statement)  The code in question is
+	stream.c and begins at the commented section called "omaha" (inside joke
+	[0]).  That said, it appears that Gene's development was to reverse engineer
+	the shout protocol in part with a Windows system (check archive.org with
+	www.litestream.net for details).  As such, Gene accounts quite often for
+	\r\n\r\n which is a windowsism.  As such, if the Litestream server did not
+	see that \r\n\r\n, it would kick the stream source.  Darkice, after review
+	of the code was sending \n\n (seeing as Darkice is being developed on Unix /
+	Linux).  We accounted for that in our code since we believe that Darkice is
+	also  doing the right thing.  Unfortunately most people have to reverse
+	engineer the shout protocols.  As such, difference between the platforms
+	rear their heads in situations like this.  Given the terse comments (or lack
+	of therefore) in the original Litestream codebase, we added the omaha
+	comment to aid in finding the section of code (there is similar code
+	sprinkled thruout but with different  applications).  This is a very small
+	fix, one line in fact.  It is a major fix though.  Please see BUGS for
+	additional info.  
+
+stj4
+	Incorporated rb4 after several hours of testing.  Updated LICENSE file to
+	reflect current license.  Removed license info from each file and put in
+	pointers to LICENSE Removed announce.h since it's out of date and pointers
+	in code were removed.  General cleaning of code, removing cruft (such as
+	commented code).  Updated Contact info, did not remove old info.  Updated
+	Readme
+
+rb4
+	Basic analysis of announcement logic.  Attempted removal of announcement via
+	state transition directly to STR_STREAMING in {restream,stream}.c.  Not yet
+	tested.
+
+stj3
+	Commented out lines pertaining to announce.h and g_announce.  These lines
+	are responsible for streaming an mp3 advertising the server and specific
+	version therein when a new client connects.  There were several reasons for
+	removing this from the codebase.  First and foremost, the announcement
+	states the Litestream server version.  Given that new releases (such as
+	this) are in progress it defeats part of the purpose of the announcement.
+	Second, the mp3 is a VBR, and certain clients (noteably mpg123) have trouble
+	with VBR mp3's.  Finally, the code for the mp3 more than doubled the size of
+	the resulting litestream binary with the mp3 stripped.  This would not be
+	good for embedded apps.
+
+	This update also contains a patch by Rick "Roundeye" Bradley for the program
+	source.  Roundeye's patch allows the user to specify an individual mp3 at
+	the commandline rather than a playlist (put an mp3 in place of the
+	playlist).  This feature was added for the RDTJ project and those users that
+	want to stream a jukebox on a file by file basis.  The one advantage of
+	Litestream (and despite Icecast docs and developers claiming otherwise) is
+	that it does not kick clients when there is no source.  Thus, you can have
+	clients connect to a server with no source, but once a source connects all
+	clients connected will receive that source.  Clients will still stay
+	connected when a source drops.  
+
+stj2
+	Change the logic in restream.c, see below for an explanation.
+
+stj1	
+	Change the logic in stream.c.  Now, users must explicitly requests
+	stats.html in order to see the server stats.  Otherwise, the mp3 stream is
+	sent out.  This gets around the issue of making sure HTTP client headers
+	were defined for each and every client.  Special thanks to Brian Abent for
+	sending this patch my way a year ago and a kick in the ass to myself for not
+	looking at it until after I figured out what Brian had already sent me (yes,
+	I reinvented the wheel). 
+
+----
+Footnotes:
+----
+
+[0] Omaha refers to the song on Waylon Jennings Honky Tonk Heros album.  It was
+the album that happened to be in the cd player when testing of live streaming
+took place with darkice and litestream.  It also represents that you're in BFE
+in the code.  
+
+More information is now available at http://www.litestream.org.
+
+--- BEGIN HISTORICAL CHANGELOG ---
+Visit http://www.litestream.net for a complete history and changelog.
